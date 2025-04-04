@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 use App\Filament\Resources\VideoResource\Pages;
 use App\Filament\Resources\VideoResource\RelationManagers;
+use App\Filament\Resources\VideoResource\RelationManagers\ViewRelationManager;
 use App\Models\Classroom;
 use App\Models\Lesson;
 use App\Models\Video;
@@ -190,7 +191,7 @@ class VideoResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            ViewRelationManager::class,
         ];
     }
 

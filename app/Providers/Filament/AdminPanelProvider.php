@@ -2,6 +2,10 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Widgets\ClassroomsCountWidget;
+use App\Filament\Widgets\CountCardWidget;
+use App\Filament\Widgets\ViewsWidget;
+use App\Models\Video;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -36,16 +40,18 @@ class AdminPanelProvider extends PanelProvider
                 'warning' => Color::Yellow,
                 'danger' => Color::Red,
                 'info' => Color::Blue,
+                'purple' => Color::Purple,
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
-            ->pages([
-                Pages\Dashboard::class,
-            ])
-            ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
+            // ->pages([
+            //     Pages\Dashboard::class,
+            // ])
+            // ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
-                Widgets\AccountWidget::class,
-                Widgets\FilamentInfoWidget::class,
+                CountCardWidget::class,
+                ViewsWidget::class,
+                ClassroomsCountWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,

@@ -41,5 +41,10 @@ class Video extends Model
         });
     }
 
-    
+
+    public function view()
+    {
+        return $this->hasMany(View::class);
+    }
+
 }
