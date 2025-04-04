@@ -52,6 +52,7 @@ class BannerResource extends Resource
                     ->label('الصورة')
                     ->image()
                     ->imageEditor()
+                    ->maxSize(2 * 1024)
                     ->imageEditorAspectRatios([
                         '16:6.5',
                     ])

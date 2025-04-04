@@ -114,7 +114,8 @@ class LessonResource extends Resource
                         ->image()
                         ->directory('images')
                         ->required()
-                        ->label('الصورة'),
+                        ->label('الصورة')
+                        ->maxSize(512),
 
                     ]),
             ]);

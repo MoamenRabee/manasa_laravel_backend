@@ -62,6 +62,8 @@ class QuestionResource extends Resource
                     ->label('صورة سؤال')
                     ->directory('quesions')
                     ->image()
+                    ->imageEditor()
+                    ->maxSize(512)
                     ->columns(columns: 1),
 
                 Forms\Components\TagsInput::make('options')

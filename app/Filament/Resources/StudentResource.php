@@ -70,7 +70,9 @@ class StudentResource extends Resource
                 Forms\Components\FileUpload::make('image')
                     ->label('الصورة')
                     ->directory(directory: 'students')
-                    ->image(),
+                    ->image()
+                    ->imageEditor()
+                    ->maxSize(512),
                 Forms\Components\TextInput::make('device_id')
                     ->label('رمز التعريفي للهاتف')
                     ->maxLength(255)
