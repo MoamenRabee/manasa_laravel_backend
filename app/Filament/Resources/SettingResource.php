@@ -24,8 +24,10 @@ class SettingResource extends Resource
 
     protected static ?string $pluralLabel = 'الاعدادات';
 
+    protected static ?int $navigationSort = 12;
 
-    protected static ?int $navigationSort = 10;
+
+    protected static ?string $navigationGroup = 'اعدادات التطبيق';
 
     public static function form(Form $form): Form
     {

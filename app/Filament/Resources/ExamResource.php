@@ -27,8 +27,9 @@ class ExamResource extends Resource
 
     protected static ?string $pluralLabel = 'الاختبارات';
 
-    protected static ?int $navigationSort = 8;
+    protected static ?int $navigationSort = 7;
 
+    protected static ?string $navigationGroup = 'محتوي التطبيق';
 
 
     public static function form(Form $form): Form

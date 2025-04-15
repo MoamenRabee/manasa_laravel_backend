@@ -28,7 +28,7 @@ class ViewResource extends Resource
 
     protected static ?string $pluralLabel = 'المشاهدات';
 
-    protected static ?int $navigationSort = 8;
+    protected static ?int $navigationSort = 13;
 
     public static function form(Form $form): Form
     {

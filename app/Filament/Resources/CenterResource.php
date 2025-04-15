@@ -18,13 +18,14 @@ class CenterResource extends Resource
     protected static ?string $model = Center::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-home-modern';
+    protected static ?string $navigationGroup = 'اعدادات التطبيق';
 
 
     protected static ?string $modelLabel = 'مركز تعليمي';
 
     protected static ?string $pluralLabel = 'المراكز التعليمية';
 
-    protected static ?int $navigationSort = 3;
+    protected static ?int $navigationSort = 10;
 
     public static function form(Form $form): Form
     {

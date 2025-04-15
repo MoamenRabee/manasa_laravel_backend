@@ -23,7 +23,10 @@ class BannerResource extends Resource
 
     protected static ?string $pluralLabel = 'اللوحات الاعلانية';
 
-    protected static ?int $navigationSort = 1;
+    protected static ?int $navigationSort = 10;
+
+    protected static ?string $navigationGroup = 'اعدادات التطبيق';
+
 
     public static function form(Form $form): Form
     {

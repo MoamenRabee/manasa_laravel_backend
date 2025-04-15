@@ -34,6 +34,7 @@ class LessonResource extends Resource
 
     protected static ?int $navigationSort = 4;
 
+    protected static ?string $navigationGroup = 'محتوي التطبيق';
 
 
     public static function form(Form $form): Form

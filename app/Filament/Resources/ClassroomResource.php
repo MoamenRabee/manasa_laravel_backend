@@ -19,13 +19,13 @@ class ClassroomResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-academic-cap';
 
-
+    protected static ?string $navigationGroup = 'اعدادات التطبيق';
 
     protected static ?string $modelLabel = 'صف دراسي';
 
     protected static ?string $pluralLabel = 'الصفوف الدراسية';
 
-    protected static ?int $navigationSort = 4;
+    protected static ?int $navigationSort = 11;
 
     public static function form(Form $form): Form
     {

@@ -29,6 +29,7 @@ class VideoResource extends Resource
 
     protected static ?int $navigationSort = 5;
 
+    protected static ?string $navigationGroup = 'محتوي التطبيق';
 
 
 
