@@ -3,7 +3,8 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\StudentResource\Pages;
-use App\Filament\Resources\StudentResource\RelationManagers;
+use App\Filament\Resources\StudentResource\RelationManagers\LessonStudentRelationManager;
+use App\Filament\Resources\StudentResource\RelationManagers\SystemsRelationManager;
 use App\Models\Center;
 use App\Models\Classroom;
 use App\Models\Student;
@@ -158,7 +159,8 @@ class StudentResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            LessonStudentRelationManager::class,
+            SystemsRelationManager::class,
         ];
     }
 

@@ -62,4 +62,10 @@ class Lesson extends Model
         return $this->belongsToMany(System::class, 'lesson_system');
     }
 
+
+    public function students()
+    {
+        return $this->belongsToMany(Student::class);
+    }
+
 }

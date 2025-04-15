@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\SystemResource\RelationManagers;
+namespace App\Filament\Resources\StudentResource\RelationManagers;
 
 use App\Models\Lesson;
 use Filament\Forms;
@@ -11,21 +11,22 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class LessonsRelationManager extends RelationManager
+class LessonStudentRelationManager extends RelationManager
 {
-    protected static string $relationship = 'lessons'; 
+    protected static string $relationship = 'lessons';
 
     protected static ?string $navigationIcon = 'heroicon-o-link';
 
     protected static ?string $modelLabel = 'درس';
 
-    protected static ?string $title = 'الدروس';
+    protected static ?string $title = 'الدروس المفعلة';
 
     protected static ?string $pluralLabel = 'درس';
 
     public function form(Form $form): Form
     {
-        return $form->schema([]);
+        return $form
+            ->schema([]);
     }
 
     public function table(Table $table): Table
@@ -43,14 +44,6 @@ class LessonsRelationManager extends RelationManager
                     ->searchable()
                     ->sortable()
                     ->limit(50),
-                Tables\Columns\TextColumn::make('classroom.name')
-                    ->label('اسم الفصل')
-                    ->searchable()
-                    ->sortable()
-                    ->limit(50),
-                Tables\Columns\BooleanColumn::make('is_active')
-                    ->label('نشط')
-                    ->sortable(),
             ])
             ->filters([
                 
@@ -72,11 +65,13 @@ class LessonsRelationManager extends RelationManager
                                 ->searchable()
                                 ->preload()
                                 ->required(),
+                            Forms\Components\Hidden::make('activated_with')
+                                ->default('admin')
                         ])
                     )
                     ->label('إضافة درس')
                     ->modalHeading('إضافة درس')
-                    ->modalSubheading('اختر الدرس الذي تريد إضافته إلى هذا النظام')
+                    ->modalSubheading('اختر الدرس الذي تريد تفعيلة')
                     ->modalButton('إضافة درس'),
             ])
             ->actions([
@@ -88,6 +83,7 @@ class LessonsRelationManager extends RelationManager
                     ->modalButton('إزالة'),
             ]);
     }
+
 
     protected function modifyQuery(Builder $query): Builder
     {

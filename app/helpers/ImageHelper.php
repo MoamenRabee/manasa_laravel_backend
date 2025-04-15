@@ -13,7 +13,7 @@ class ImageHelper {
 
         $path = $image->storeAs($path, $filename, 'public');
 
-        return 'storage/' . $path;
+        return $path;
     }
 
 

@@ -38,4 +38,10 @@ class System extends Model
     {
         return $this->belongsToMany(Lesson::class, 'lesson_system');
     }
+
+
+    public function students()
+    {
+        return $this->belongsToMany(Student::class);
+    }
 }

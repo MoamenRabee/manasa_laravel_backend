@@ -54,4 +54,15 @@ class Student extends Authenticatable implements JWTSubject
     {
         return $this->belongsTo(Center::class);
     }
+
+
+    public function lessons()
+    {
+        return $this->belongsToMany(Lesson::class)->withPivot('activated_with')->withTimestamps();
+    }
+
+    public function systems()
+    {
+        return $this->belongsToMany(System::class)->withPivot('activated_with')->withTimestamps();
+    }
 }

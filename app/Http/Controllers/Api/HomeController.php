@@ -45,12 +45,14 @@ class HomeController extends Controller
         ->get();
 
         $banners = Banner::all();
-        $systems = System::where('is_active', operator: 1)->where('classroom_id', $user->classroom_id)->get();
+        $monthlySystems = System::where('is_active', operator: 1)->where('classroom_id', $user->classroom_id)->where('type','month')->get();
+        $packagesSystems = System::where('is_active', operator: 1)->where('classroom_id', $user->classroom_id)->where('type','package')->get();
 
         return Response::api(200, [
             'banners' => $banners,
             'lessons' => $lessons,
-            'systems'=> $systems
+            'monthlySystems'=> $monthlySystems,
+            'packagesSystems'=> $packagesSystems,
         ],'تم جلب البيانات بنجاح');
 
 

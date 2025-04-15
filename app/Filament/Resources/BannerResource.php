@@ -56,6 +56,7 @@ class BannerResource extends Resource
                     ->imageEditorAspectRatios([
                         '16:6.5',
                     ])
+                    ->directory('banners')
                     ->required(),
             ]);
     }

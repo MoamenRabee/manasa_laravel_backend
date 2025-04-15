@@ -7,6 +7,7 @@ use App\Filament\Resources\UserResource\RelationManagers;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Pages\Page;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -40,13 +41,31 @@ class UserResource extends Resource
                     ->email()
                     ->required()
                     ->label('البريد الالكتروني')
-                    ->unique()
+                    ->unique(ignoreRecord: true)
                     ->maxLength(255),
+                
+                Forms\Components\Select::make('type')
+                    ->required()
+                    ->label('نوع المستخدم')
+                    ->options([
+                        'admin' => 'مشرف',
+                        'assistant' => 'مستخدم',
+                    ])
+                    ->placeholder('اختر نوع المستخدم')
+                    ->dehydrated(fn($state) => filled($state))
+                    ->hidden(function ($record) {
+                        if (!$record) return false; 
+                        return $record->type === 'admin' && $record->id === auth()->id();
+                    }),
+                
                 Forms\Components\TextInput::make('password')
                     ->password()
                     ->label('كلمة المرور')
-                    ->required()
-                    ->maxLength(255),
+                    ->maxLength(255)
+                    ->dehydrateStateUsing(fn($state) => filled($state) ? \Illuminate\Support\Facades\Hash::make($state) : null)
+                    ->afterStateHydrated(fn($record, callable $set) => $set('password', ''))
+                    ->required(fn (Page $livewire) => $livewire instanceof Pages\CreateUser)
+                    ->dehydrated(fn($state) => filled($state)),
             ])->columns(1);
     }
 
@@ -58,6 +77,16 @@ class UserResource extends Resource
                     ->searchable()->label('الاسم'),
                 Tables\Columns\TextColumn::make('email')
                     ->searchable()->label('البريد الالكتروني'),
+                Tables\Columns\BadgeColumn::make('type')
+                    ->label('نوع المستخدم')
+                    ->colors([
+                        'primary' => 'admin',
+                        'success' => 'assistant',
+                    ])
+                    ->formatStateUsing(fn (string $state): string => [
+                        'admin' => 'مشرف',
+                        'assistant' => 'مستخدم',
+                    ][$state] ?? $state),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime('Y-m-d H:i A')
                     ->sortable()
@@ -96,6 +125,13 @@ class UserResource extends Resource
             'create' => Pages\CreateUser::route('/create'),
             'edit' => Pages\EditUser::route('/{record}/edit'),
         ];
+    }
+
+
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return auth()->user()?->type === 'admin';
     }
 
 
