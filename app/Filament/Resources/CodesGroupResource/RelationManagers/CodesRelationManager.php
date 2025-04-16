@@ -87,13 +87,19 @@ class CodesRelationManager extends RelationManager
                         $price = $data['price'];
                         $group = $this->ownerRecord;
 
-                        for ($i = 0; $i < $count; $i++) {
-                            Code::create([
-                                'code' => str_pad(mt_rand(0, 99999999), 8, '0', STR_PAD_LEFT),
-                                'price' => $price,
-                                'codes_group_id' => $group->id,
-                            ]);
-                        }
+                        do {
+                            $newCode = str_pad(mt_rand(0, 99999999), 8, '0', STR_PAD_LEFT);
+                            $exists = Code::where('code', $newCode)->exists();
+
+                            if (!$exists) {
+                                Code::create([
+                                    'code' => $newCode,
+                                    'price' => $price,
+                                    'codes_group_id' => $group->id,
+                                ]);
+                                $count--;
+                            }
+                        } while ($count > 0);
 
                         Notification::make()
                             ->title("✅ تم إنشاء $count كود جديد")
