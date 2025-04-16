@@ -2,9 +2,13 @@
 
 use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\ConfigController;
+use App\Http\Controllers\Api\ExamController;
 use App\Http\Controllers\Api\FeedsController;
+use App\Http\Controllers\Api\FileController;
 use App\Http\Controllers\Api\HomeController;
 use App\Http\Controllers\Api\LessonsController;
+use App\Http\Controllers\Api\SystemsController;
+use App\Http\Controllers\Api\VideoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -29,6 +33,12 @@ Route::group([], function () {
     Route::get('/home', [HomeController::class,'index']);
     Route::get('/feeds', [FeedsController::class,'index']);
     Route::get('/lesson', [LessonsController::class, 'show']);
+    Route::get('/video', [VideoController::class,'index']);
+    Route::get('/exam/{id}/questions', [ExamController::class, 'getQuestions']);
+    Route::get('/file/{id}', [FileController::class,'index']);
+
+    Route::post('/lesson/activate', [LessonsController::class, 'activateLesson']);
+    Route::post('/system/activate', [SystemsController::class,'activateSystem']);
 })->middleware('auth:api');
 
 

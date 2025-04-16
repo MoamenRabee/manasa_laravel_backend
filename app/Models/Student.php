@@ -58,11 +58,11 @@ class Student extends Authenticatable implements JWTSubject
 
     public function lessons()
     {
-        return $this->belongsToMany(Lesson::class)->withPivot('activated_with')->withTimestamps();
+        return $this->belongsToMany(Lesson::class,'lesson_student')->withPivot('activated_with')->withTimestamps();
     }
 
     public function systems()
     {
-        return $this->belongsToMany(System::class)->withPivot('activated_with')->withTimestamps();
+        return $this->belongsToMany(System::class , 'student_system')->withPivot('activated_with')->withTimestamps();
     }
 }

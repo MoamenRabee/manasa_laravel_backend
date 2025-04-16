@@ -10,4 +10,8 @@ class Center extends Model
         'name',
         'address',
     ];
+
+    public function student() {
+        return $this->belongsTo(Student::class);
+    }
 }

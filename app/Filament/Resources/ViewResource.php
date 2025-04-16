@@ -97,8 +97,10 @@ class ViewResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-               
+                
             ])
+            
+            
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
@@ -133,7 +135,10 @@ class ViewResource extends Resource
     }
 
 
-
+    public static function shouldRegisterNavigation(): bool
+    {
+        return false;
+    }
 
 
 }

@@ -49,7 +49,6 @@ class LessonStudentRelationManager extends RelationManager
                 
             ])
             ->headerActions([
-               
                 Tables\Actions\AttachAction::make()
                     ->preloadRecordSelect()
                     ->recordSelectSearchColumns(['name'])

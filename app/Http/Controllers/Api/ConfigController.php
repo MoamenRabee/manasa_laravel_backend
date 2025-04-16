@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Center;
 use App\Models\Classroom;
 use App\Models\Setting;
-use Illuminate\Http\Request;
 use Response;
 
 class ConfigController extends Controller

@@ -1,7 +1,10 @@
 <?php
 
 namespace App\Filament\Resources\VideoResource\RelationManagers;
-
+use App\Models\Center;
+use App\Models\View;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\ViewsExport;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -66,9 +69,31 @@ class ViewRelationManager extends RelationManager
             
             ])
             ->filters([
-                //
+
+                Tables\Filters\SelectFilter::make('center_id')
+                    ->label('السنتر')
+                    ->relationship('student.center', 'name') // student.center يجب أن تكون العلاقة متاحة
+                    ->searchable() // اختياري
+                    ->preload(), // اختياري
+                    
             ])
             ->headerActions([
+                Tables\Actions\Action::make('exportViews')
+                ->label('📤 تصدير Excel')
+                ->action(function (array $data, $livewire) {
+                    // نستخدم query المطبّق عليه الفلاتر
+                    $query = $livewire->getFilteredTableQuery();
+
+                    // نضمن أننا نفلتر فقط المشاهدات المرتبطة بالفيديو الحالي
+                    $query->where('video_id', $this->ownerRecord->id);
+
+                    return Excel::download(
+                        new ViewsExport($query),
+                        'views_export_' . now()->format('Y-m-d') . '.xlsx'
+                    );
+                }),
+
+
                 Tables\Actions\CreateAction::make(),
             ])
             ->actions([

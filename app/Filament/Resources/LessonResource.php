@@ -42,20 +42,22 @@ class LessonResource extends Resource
         return $form
             ->schema([
                 Section::make('بيانات الدرس')
-                    ->columns(3)
+                    ->columns(columns: 2)
                     ->schema([
                         TextInput::make('name')
                             ->required()
                             ->label('الاسم')
-                            ->maxLength(255)->columnSpan(span: 3),
+                            ->maxLength(255)
+                            ->columnSpan(span: 2),
                         TextInput::make('sort_number')
                             ->required()
                             ->label('الترتيب')
-                            ->numeric(),
+                            ->numeric()
+                            ->columnSpan(span: 1),
                         Select::make('classroom_id')
                             ->required()
                             ->label('الصف الدراسي')
-                            ->columnSpan(1)
+                            ->columnSpan(span: 1)
                             ->options(Classroom::all()->pluck('name', 'id'))
                             ->searchable()
                             ->reactive()
@@ -79,27 +81,28 @@ class LessonResource extends Resource
                                 1 => 'نعم',
                                 0 => 'لا',
                             ])
-                            ->default(1)
+                            ->default(2)
                             ->reactive()
                             ->afterStateUpdated(function (callable $set, $state) {
                                 if ($state == 1) {
                                     $set('price', null);
                                 }
-                            }),
+                            })
+                            ->columnSpan(span: 1),
                         
                         TextInput::make('price')
                             ->required()
                             ->label('السعر')
                             ->numeric()
-                            ->hidden(fn (callable $get) => $get('is_free') == 1),
-                        
+                            ->hidden(fn (callable $get) => $get('is_free') == 1)
+                            ->columnSpan(1),
                         Checkbox::make('is_active')
                                 ->label('نشط')
                                 ->default(true)
-                                ->columnSpan(3),
+                                ->columnSpan(2),
                     ]),
-                    Section::make('الوصف و الصوره')
-                    ->columns(3)
+                Section::make('الوصف و الصوره')
+                    ->columns(columns: 3)
                     ->schema(components: [
                         RichEditor::make('description')
                         ->label('الوصف')
@@ -118,8 +121,8 @@ class LessonResource extends Resource
                         ->label('الصورة')
                         ->maxSize(512),
 
-                    ]),
-            ]);
+                ]),
+            ])->columns(1);
     }
 
     public static function table(Table $table): Table
