@@ -46,25 +46,25 @@ class VideoResource extends Resource
                     ->numeric()
                     ->default(3)
                     ->label('عدد المشاهدات'),
-                Forms\Components\Select::make('is_free')
-                    ->label('مجاني')
-                    ->required()
-                    ->options([
-                        1 => 'نعم',
-                        0 => 'لا',
-                    ])
-                    ->default(1)
-                    ->reactive()
-                    ->afterStateUpdated(function (callable $set, $state) {
-                        if ($state == 1) {
-                            $set('price', null);
-                        }
-                    }),
-                Forms\Components\TextInput::make('price')
-                    ->required()
-                    ->label('السعر')
-                    ->numeric()
-                    ->hidden(fn (callable $get) => $get('is_free') == 1),
+                // Forms\Components\Select::make('is_free')
+                //     ->label('مجاني')
+                //     ->required()
+                //     ->options([
+                //         1 => 'نعم',
+                //         0 => 'لا',
+                //     ])
+                //     ->default(1)
+                //     ->reactive()
+                //     ->afterStateUpdated(function (callable $set, $state) {
+                //         if ($state == 1) {
+                //             $set('price', null);
+                //         }
+                //     }),
+                // Forms\Components\TextInput::make('price')
+                //     ->required()
+                //     ->label('السعر')
+                //     ->numeric()
+                //     ->hidden(fn (callable $get) => $get('is_free') == 1),
                 Forms\Components\Select::make('link_type')
                     ->options([
                         'youtube' => 'يوتيوب',
@@ -126,15 +126,15 @@ class VideoResource extends Resource
                     ->searchable()
                     ->sortable()
                     ->label('اسم الفيديو'),
-                    Tables\Columns\BadgeColumn::make('is_free')
-                    ->label('مجاني')
-                    ->getStateUsing(function (Model $record) {
-                        return $record->is_free ? 'مجاني' : 'السعر: ' . $record->price . ' ج.م';
-                    })
-                    ->colors([
-                        'success' => fn (Model $record) => $record->is_free,
-                        'warning' => fn (Model $record) => !$record->is_free,
-                    ]),
+                // Tables\Columns\BadgeColumn::make('is_free')
+                //     ->label('مجاني')
+                //     ->getStateUsing(function (Model $record) {
+                //         return $record->is_free ? 'مجاني' : 'السعر: ' . $record->price . ' ج.م';
+                //     })
+                //     ->colors([
+                //         'success' => fn (Model $record) => $record->is_free,
+                //         'warning' => fn (Model $record) => !$record->is_free,
+                //     ]),
                 Tables\Columns\TextColumn::make('sort_number')
                     ->numeric()
                     ->sortable()

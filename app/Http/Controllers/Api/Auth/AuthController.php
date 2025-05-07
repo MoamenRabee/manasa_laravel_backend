@@ -54,7 +54,7 @@ class AuthController extends Controller
     public function profile(Request $request)
     {
         $userLogin = auth('api')->user();
-        $user = Student::with('center')->with('classroom')->find($userLogin->id);
+        $user = Student::with('lessons')->with('systems')->with('center')->with('classroom')->find($userLogin->id);
         return Response::api(200,$user,'تم جلب البيانات بنجاح');
     }
 

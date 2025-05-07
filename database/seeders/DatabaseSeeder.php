@@ -23,6 +23,8 @@ class DatabaseSeeder extends Seeder
             'password'=> bcrypt('password'),
         ]);
 
+        
+
         Setting::create([
             'android_build_number' => 1,
             'ios_build_number' => 1,

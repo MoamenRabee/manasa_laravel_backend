@@ -32,13 +32,15 @@ Route::group(['prefix' => 'auth'], function () {
 Route::group([], function () {
     Route::get('/home', [HomeController::class,'index']);
     Route::get('/feeds', [FeedsController::class,'index']);
-    Route::get('/lesson', [LessonsController::class, 'show']);
-    Route::get('/video', [VideoController::class,'index']);
+    Route::get('/system/details', [SystemsController::class, 'show']);
+    Route::get('/lesson/details', [LessonsController::class, 'show']);
+    Route::get('/video/details', [VideoController::class,'index']);
     Route::get('/exam/{id}/questions', [ExamController::class, 'getQuestions']);
     Route::get('/file/{id}', [FileController::class,'index']);
 
     Route::post('/lesson/activate', [LessonsController::class, 'activateLesson']);
     Route::post('/system/activate', [SystemsController::class,'activateSystem']);
+    Route::post('/code/activate', [HomeController::class,'activateCode']);  
 })->middleware('auth:api');
 
 

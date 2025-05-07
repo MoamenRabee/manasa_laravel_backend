@@ -20,7 +20,7 @@ class LessonsController extends Controller
                 $query->select(['id','name','image','lesson_id']);
             },
             'videos' => function ($query) {
-                $query->select(['id','name','sort_number','views_count','duration','is_active','description','link_type','is_free','price','created_at','lesson_id'])->where('is_active', 1);
+                $query->select(['id','name','sort_number','views_count','duration','is_active','description','link_type','created_at','lesson_id'])->where('is_active', 1);
             },
             'required_exam' => function ($query) {
                 $query->where('status', '!=', 'pending')
@@ -28,7 +28,8 @@ class LessonsController extends Controller
             },
             'exams' => function ($query) {
                 $query->where('status', '!=', 'pending')
-                ->where('status','!=', 'show_results');
+                ->where('status','!=', 'show_results')
+                ->withCount('questions');;
             },
         ])->find($request->lesson_id);
 

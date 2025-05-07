@@ -24,7 +24,6 @@ class UserResource extends Resource
 
     protected static ?string $pluralLabel = 'المستخدمين';
 
-
     protected static ?int $navigationSort = 0;
 
 

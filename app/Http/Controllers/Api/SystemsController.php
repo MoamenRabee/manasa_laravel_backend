@@ -12,6 +12,15 @@ use Illuminate\Support\Facades\Response;
 
 class SystemsController extends Controller
 {
+
+
+    public function show(Request $request)
+    {
+        $system = System::with('lessons')->find($request->system_id);
+        return Response::api(200, $system , 'تم جلب البيانات بنجاح');
+    }
+
+
     public function activateSystem(ActivateSystemRequest $request){
 
 

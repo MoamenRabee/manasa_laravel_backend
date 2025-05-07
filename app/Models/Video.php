@@ -17,8 +17,6 @@ class Video extends Model
         'description',
         'link_type',
         'views_count',
-        'is_free',
-        'price',
     ];
 
     public function lesson()

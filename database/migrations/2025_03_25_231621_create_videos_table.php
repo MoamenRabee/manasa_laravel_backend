@@ -23,8 +23,6 @@ return new class extends Migration
             $table->boolean('is_active')->default(1);
             $table->text('description')->nullable();
             $table->enum('link_type', ['youtube','vimeo'])->default('youtube');
-            $table->boolean('is_free')->default(value: 1);
-            $table->decimal('price')->nullable();
             $table->timestamps();
         });
     }
